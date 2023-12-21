@@ -1,4 +1,4 @@
-YOUR_API_KEY = "AIzaSyAJq8E1Khv6fWPAuNECajWPcdsQVXsJUhg"
+YOUR_API_KEY = ""
 userInput = "Give me best suggestions for laptop buying"
 
 from fastapi import FastAPI, Request
