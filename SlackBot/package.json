@@ -1,0 +1,21 @@
+{
+  "name": "slackbot",
+  "version": "1.0.0",
+  "description": "Jira GPT client",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "hybridx",
+  "license": "MIT",
+  "dependencies": {
+    "@slack/bolt": "^3.17.0",
+    "axios": "^1.6.2",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
