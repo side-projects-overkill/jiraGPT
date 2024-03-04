@@ -1,7 +1,7 @@
-const { App } = require('@slack/bolt');
-const { logger } = require('./utils/logger');
-const { registerListeners } = require('./listeners');
 require('dotenv').config();
+const { App } = require('@slack/bolt');
+const { logger: log } = require('./utils/logger');
+const { registerListeners } = require('./listeners');
 
 /** Initialization */
 const app = new App({
@@ -9,12 +9,30 @@ const app = new App({
   signingSecret: process.env.SLACK_SIGNING_SECRET,
   socketMode: true,
   appToken: process.env.APP_TOKEN,
+  dispatchErrorHandler: async ({ error, logger, response }) => {
+    logger.error(`dispatch error: ${error}`);
+    response.writeHead(404);
+    response.write('Something is wrong!');
+    response.end();
+  },
+  processEventErrorHandler: async ({ error, logger, response }) => {
+    logger.error(`processEvent error: ${error}`);
+    response.writeHead(200);
+    response.end();
+    return true;
+  },
+  unhandledRequestHandler: async ({ logger, response }) => {
+    logger.info('Acknowledging this incoming request');
+    // acknowledge it anyway!
+    response.writeHead(200);
+    response.end();
+  },
 });
 /** Register Listeners */
 registerListeners(app);
 
 app.error(() => {
-  logger.fatal('This is fatal error');
+  log.fatal('This is fatal error');
 });
 
 /**
@@ -23,8 +41,14 @@ app.error(() => {
 (async () => {
   try {
     await app.start(process.env.PORT || 3000);
-    logger.info('⚡️ App is running!');
+    log.info('⚡️ App is running!');
   } catch (error) {
-    logger.error(`App start error: ${error}`);
+    log.error(`App start error: ${error}`);
   }
 })();
+
+process.on('uncaughtException', (err) => {
+  log.error('UNCAUGHT EXCEPTION 💥 Shutting down');
+  log.error(`${err.name}: ${err.message}`);
+  process.exit(1);
+});
