@@ -1,8 +1,7 @@
-import { axios } from 'axios';
+const axios = require('axios');
 
 const instance = axios.create({
-  baseURL: 'https://api.example.com',
+  baseURL: 'https://localhost:3000/api/v1/',
 });
 
-instance.defaults.baseURL = 'https://api.example.com';
 instance.defaults.headers.post['Content-Type'] = 'application/json';
