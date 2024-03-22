@@ -1,7 +1,10 @@
 const axios = require('axios');
 
-const instance = axios.create({
-  baseURL: 'https://localhost:3000/api/v1/',
+const axiosConfigInstance = axios.create({
+  baseURL: 'http://localhost:3000/api/v1/',
+  headers: {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+  },
 });
-
-instance.defaults.headers.post['Content-Type'] = 'application/json';
+module.exports = { axiosConfigInstance };
