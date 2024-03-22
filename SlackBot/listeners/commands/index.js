@@ -1,7 +1,7 @@
-const { findCommandCallback } = require('./find');
 const { groomCommandCallback } = require('./groom');
+const { createJiraCommandCallback } = require('./createjira');
 
 module.exports.register = (app) => {
-  app.command('/find', findCommandCallback);
   app.command('/groom', groomCommandCallback);
+  app.command('/createjira', createJiraCommandCallback);
 };
