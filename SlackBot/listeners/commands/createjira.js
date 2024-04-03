@@ -5,9 +5,10 @@ const createJiraCommandCallback = async ({ command, ack, respond, say }) => {
   try {
     await ack();
     await respond(`Creating Jira for ${command.text}`);
-    const data = createJira(command.text);
-    logger.info(data);
-    await say(`creating jira completed for ${data}`);
+    await createJira(command.text);
+    // Add error handler
+    logger.info('Jira created');
+    await say(`Creating jira completed for: ${command.text}`);
   } catch (error) {
     logger.error(error);
   }
