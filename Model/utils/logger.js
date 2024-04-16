@@ -1,4 +1,5 @@
-const pino = require("pino");
+import pino from "pino";
+
 const logger = pino({
   level: process.env.PINO_LEVEL,
   transport: {
@@ -6,4 +7,4 @@ const logger = pino({
   },
 });
 
-module.exports = { logger };
+export default logger;

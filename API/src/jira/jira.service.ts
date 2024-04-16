@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import aiConfig from 'utils/aiConfig';
-import instance from 'utils/axios';
+import jiraApiInstance from 'utils/axios';
+import logger from 'utils/logger';
 
 @Injectable()
 export class JiraService {
@@ -9,19 +10,19 @@ export class JiraService {
       promptText: query,
     });
     const resp = getData.data;
-    const { data } = await instance.post('/issue', {
+    const { data } = await jiraApiInstance.post('/issue', {
       fields: {
+        summary: resp.Title as string,
+        description: resp.Description as string,
         project: {
-          key: 'CHAT',
+          key: process.env.PROJECT_KEY,
         },
-        summary: resp.Title,
         issuetype: {
           name: 'Task',
         },
-        description: resp.Description,
       },
     });
-    console.log(data);
+    logger.log(data);
     return 'Jira has been created for ' + query;
   }
 }

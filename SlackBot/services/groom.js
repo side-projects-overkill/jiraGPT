@@ -1,7 +1,7 @@
-const { axiosConfigInstance } = require('../config/axiosConfig');
+const { axiosConfigInstance } = require("../config/axiosConfig");
 
 const groomJira = async (query) => {
-  const { data } = await axiosConfigInstance.post('/groom', {
+  const { data } = await axiosConfigInstance.post("/groom", {
     query,
   });
   return data;

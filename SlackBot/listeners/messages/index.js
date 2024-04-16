@@ -1,5 +1,5 @@
-const { greetingsCallback } = require('./greetings');
+const { greetingsCallback } = require("./greetings");
 
 module.exports.register = (app) => {
-  app.message('help', greetingsCallback);
+  app.message("help", greetingsCallback);
 };

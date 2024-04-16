@@ -16,13 +16,19 @@
       {
         "command": "/createjira",
         "description": "Creates a groomed Jira ticket with your prompt",
-        "usage_hint": "Create login page function",
+        "usage_hint": "[your query here]",
         "should_escape": false
       },
       {
-        "command": "/echo",
-        "description": "The echo command simply echoes on command",
-        "usage_hint": "Hello World",
+        "command": "/groom",
+        "description": "Grooms a Jira ticket",
+        "usage_hint": "DEE-1234678",
+        "should_escape": false
+      },
+      {
+        "command": "/update",
+        "description": "Updates the jira ticket with comment",
+        "usage_hint": "DEE-12356789 Added a new bot",
         "should_escape": false
       }
     ]
