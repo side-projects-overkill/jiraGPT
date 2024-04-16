@@ -1,14 +1,15 @@
 import 'dotenv/config';
 import axios from 'axios';
 
-const instance = axios.create({
-  baseURL: 'https://redhat-exd.atlassian.net/rest/api/latest/',
+const jiraApiInstance = axios.create({
+  baseURL: `${process.env.JIRA_HOST}/rest/api/latest`,
   headers: {
     'Content-Type': 'application/json',
-    Authorization: process.env.AUTH_KEY,
+    Authorization: process.env.JIRA_AUTH_KEY,
   },
 });
+console.log(process.env.JIRA_HOST);
 
-instance.defaults.headers.post['Content-Type'] = 'application/json';
+jiraApiInstance.defaults.headers.post['Content-Type'] = 'application/json';
 
-export default instance;
+export default jiraApiInstance;
