@@ -12,7 +12,7 @@ export class JiraService {
     const { data } = await instance.post('/issue', {
       fields: {
         project: {
-          key: 'CHAT',
+          key: 'KAN',
         },
         summary: resp.Title,
         issuetype: {
